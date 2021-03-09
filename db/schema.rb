@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_06_164324) do
+ActiveRecord::Schema.define(version: 2021_03_09_215252) do
 
   create_table "invites", force: :cascade do |t|
     t.integer "sender_id"
@@ -26,14 +26,27 @@ ActiveRecord::Schema.define(version: 2021_03_06_164324) do
     t.integer "usergroup_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin"
+    t.integer "balance"
     t.index ["user_id"], name: "index_memberships_on_user_id"
     t.index ["usergroup_id"], name: "index_memberships_on_usergroup_id"
+  end
+
+  create_table "proposals", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "usergroup_id"
+    t.integer "days"
   end
 
   create_table "usergroups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "pot"
+    t.integer "wager"
+    t.integer "weeks"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,6 +57,14 @@ ActiveRecord::Schema.define(version: 2021_03_06_164324) do
     t.string "last_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "workout_posts", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "proposal_id"
+    t.string "description"
   end
 
   add_foreign_key "memberships", "usergroups"
