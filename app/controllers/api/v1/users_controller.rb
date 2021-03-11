@@ -27,7 +27,14 @@ class Api::V1::UsersController < ApplicationController
         if user.save
             render json: user
         else
-            render json: {errors: user.errors}, status: 500
+            user = User.find_by(username: params[:user][:username])
+            
+            if user
+            render json: {error: "Username already exists"}
+            else
+                render json: {error: "Email already exists"}
+            end
+
         end
     end
 
