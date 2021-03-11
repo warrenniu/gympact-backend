@@ -13,12 +13,21 @@ class Api::V1::UsersController < ApplicationController
 
 
     def create
-        user = User.create!(user_params)
+        # user = User.create!(user_params)
 
-        if user.valid?
+        # if user.valid?
+        #     render json: user
+        # else
+        #     render json: {error: user.error}, status: :not_acceptable 
+        # end
+
+        user = User.new(user_params)
+        
+
+        if user.save
             render json: user
         else
-            render json: {error: 'failed to create user'}, status: :not_acceptablee    
+            render json: {errors: user.errors}, status: 500
         end
     end
 
