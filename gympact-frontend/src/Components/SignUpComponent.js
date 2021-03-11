@@ -18,7 +18,7 @@ export default function SignUpComponent(){
     const [userPassword,setUserPassword] = useInput("")
     const [userFirstName, setUserFirstName] = useInput("")
     const [userLastName, setUserLastName] = useInput("")
-    
+    const [formErrors,setFormErrors] = useState("")
     
     const submitHandler = e =>{
         e.preventDefault()
@@ -40,10 +40,18 @@ export default function SignUpComponent(){
             body: JSON.stringify({user: userObj})
         })
         .then(response => {
-             if(!response.ok) throw response
+            console.log("FSDAFDSFDSAFDS",response)
+            if(!response.ok) throw response
              return response.json()
             })
-        .then(data => console.log(data))
+        .then(data => 
+            // data.errors ? console.log("DDDD", data.errors) : console.log("No errors")
+            {
+                console.log(data.error)
+                setFormErrors(data.error)
+            }
+        
+            )
         
         .catch(error => {
             console.log("registration errors", error)
@@ -61,6 +69,7 @@ export default function SignUpComponent(){
                 <input type="text" placeholder="Username" name="username" value={userName} onChange={setUserName}></input>
                 <input type="text" placeholder="Password" name="password" value={userPassword} onChange={setUserPassword}></input>
                 <button>Submit</button>
+                <h3>{formErrors}</h3>
             </form>
         </div>
     )
