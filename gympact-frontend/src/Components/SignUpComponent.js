@@ -47,7 +47,7 @@ export default function SignUpComponent(){
         .then(data => 
             // data.errors ? console.log("DDDD", data.errors) : console.log("No errors")
             {
-                console.log(data.error)
+                console.log(data)
                 setFormErrors(data.error)
             }
         
@@ -63,11 +63,11 @@ export default function SignUpComponent(){
             <form onSubmit={submitHandler}>
            
                 <h1>SignUp Component</h1>
-                <input type="text" placeholder="First Name" name="firstname" value={userFirstName} onChange={setUserFirstName}></input>
-                <input type="text" placeholder="Last Name" name="lastname" value={userLastName} onChange={setUserLastName}></input>
-                <input type="text" placeholder="Email" name="email" value={userEmail} onChange={setUserEmail}></input>
-                <input type="text" placeholder="Username" name="username" value={userName} onChange={setUserName}></input>
-                <input type="text" placeholder="Password" name="password" value={userPassword} onChange={setUserPassword}></input>
+                <input type="text" placeholder="First Name" name="firstname" value={userFirstName} onChange={setUserFirstName} required></input>
+                <input type="text" placeholder="Last Name" name="lastname" value={userLastName} onChange={setUserLastName}required></input>
+                <input type="text" placeholder="Email" name="email" value={userEmail} onChange={setUserEmail}required></input>
+                <input type="text" placeholder="Username" name="username" value={userName} onChange={setUserName}required></input>
+                <input type="password" placeholder="Password" name="password" value={userPassword} onChange={setUserPassword}required></input>
                 <button>Submit</button>
                 <h3>{formErrors}</h3>
             </form>

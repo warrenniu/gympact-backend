@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import history from './History/history'
 
 //Redux
 import { createStore, applyMiddleware } from 'redux';
@@ -16,7 +17,7 @@ const store = createStore(rootReducer,applyMiddleware(thunk))
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router>
+      <Router history={history}>
     <App />
     </Router>
     </Provider>
