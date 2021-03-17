@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, :usergroups, :memberships, :invites
+      post '/login', to: 'auth#create'
+      get '/profile', to: 'users#profile'
+      post '/usergroups/:id', to: 'usergroups#show'
     end
 
   end

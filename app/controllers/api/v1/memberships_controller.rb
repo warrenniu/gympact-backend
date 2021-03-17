@@ -1,4 +1,7 @@
 class Api::V1::MembershipsController < ApplicationController
+    skip_before_action :authorized, only: [:create]
+
+
     def create
         membership = Membership.create!(membership_params)
 
@@ -19,6 +22,6 @@ class Api::V1::MembershipsController < ApplicationController
 
 private
     def membership_params
-        params.permit(:user_id,:usergroup_id)
+        params.permit(:user_id,:usergroup_id,:admin,:balance)
     end
 end

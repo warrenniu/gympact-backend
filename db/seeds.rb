@@ -25,5 +25,5 @@
 # user2 = User.create!({email:"kevin@gmail.com", username:"kevinh", first_name:"Kevin",last_name:"Huang",password:"1234"})
 
 # group = Usergroup.create!(name:"First Test Group")
-membership1 = Membership.create!(user_id:13,usergroup_id:6)
-membership2 = Membership.create!(user_id:14,usergroup_id:6)
+# membership1 = Membership.create!(user_id:13,usergroup_id:6)
+# membership2 = Membership.create!(user_id:14,usergroup_id:6)

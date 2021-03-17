@@ -1,5 +1,5 @@
 class Api::V1::UsersController < ApplicationController
-
+    skip_before_action :authorized, only: [:create,:show,:index,:profile]
     def index
         users = User.all.includes(:usergroups)
         render json: users, except: [:created_at, :updated_at]
@@ -21,15 +21,16 @@ class Api::V1::UsersController < ApplicationController
         #     render json: {error: user.error}, status: :not_acceptable 
         # end
 
-        user = User.new(user_params)
+        @user = User.new(user_params)
         
 
-        if user.save
-            render json: user
+        if @user.save
+            @token = encode_token(user_id: @user.id)
+            render json: {user: UserSerializer.new(@user), jwt: @token}, status: :created
         else
-            user = User.find_by(username: params[:user][:username])
+            @user = User.find_by(username: params[:user][:username])
             
-            if user
+            if @user
             render json: {error: "Username already exists"}
             else
                 render json: {error: "Email already exists"}
@@ -52,6 +53,9 @@ class Api::V1::UsersController < ApplicationController
         render json: {}
     end
 
+    def profile
+        render json: {user: current_user}, status: :accepted
+    end
 
     private
 
